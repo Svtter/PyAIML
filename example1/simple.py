@@ -2,6 +2,10 @@ import sys
 sys.path.insert(0, "../")
 
 import aiml
+import Split
+
+import logging
+logging.basicConfig()
 
 # The Kernel object is the public interface to
 # the AIML interpreter.
@@ -19,4 +23,8 @@ k.respond("load aiml cn")
 
 # Loop forever, reading user input from the command
 # line and printing responses.
-while True: print k.respond(raw_input("> "))
+while True:
+    text = raw_input("> ")
+    text = Split.splitChinese(text)
+    logging.info(text)
+    print k.respond(text)
